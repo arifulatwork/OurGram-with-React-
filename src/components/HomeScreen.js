@@ -1,5 +1,6 @@
 import React from "react";
 import Grid from "@mui/material/Grid2";
+import AccountInfo from "./AccountInfo";
 
 export default function HomeScreen() {
   return (
@@ -8,7 +9,7 @@ export default function HomeScreen() {
         News Feed will be here
       </Grid>
       <Grid size={{ lg: 4 }} sx={{ display: { xs: 'none', lg: 'block' } }}>
-        Account Info will be here
+        <AccountInfo/>
       </Grid>
     </Grid>
   );

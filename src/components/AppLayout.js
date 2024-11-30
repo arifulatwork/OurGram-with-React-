@@ -17,7 +17,9 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveScreen } from '../store/actions/application';
-import { HOME } from '../utils/ScreenNames';
+import { HOME, MY_PROFILE } from '../utils/ScreenNames';
+import { CREATE_POST } from '../utils/ScreenNames';
+import { showMyProfile } from '../store/actions/application';
 
 const drawerWidth = 340;
 export default function AppLayout(props) {
@@ -29,6 +31,18 @@ export default function AppLayout(props) {
 
   const handleHome = () => {
     dispatch(setActiveScreen(HOME, {}));
+    setIsClosing(true);
+    setMobileOpen(false);
+  }
+
+  const handleCreatePost = () => {
+    dispatch(setActiveScreen(CREATE_POST, {}));
+    setIsClosing(true);
+    setMobileOpen(false);
+  } 
+
+  const handleShowMyProfile = () => {
+    dispatch(showMyProfile());
     setIsClosing(true);
     setMobileOpen(false);
   }
@@ -61,7 +75,7 @@ export default function AppLayout(props) {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleCreatePost} selected={ activeScreen == CREATE_POST }>
             <ListItemIcon>
               <AddCircleOutlineIcon />
             </ListItemIcon>
@@ -69,7 +83,7 @@ export default function AppLayout(props) {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleShowMyProfile} selected={ activeScreen == MY_PROFILE }>
             <ListItemIcon>
               <AccountCircleIcon />
             </ListItemIcon>
