@@ -1,0 +1,58 @@
+{
+  "name": "SocialNetwork",
+  "version": "0.1.0",
+  "description": "SocialNetwork",
+  "keywords": [
+    "rest",
+    "data",
+    "react"
+  ],
+  "author": "SocialNetwork",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "react": "^18.3.1",
+	"react-dom": "^18.3.1",
+    "prop-types": "^15.8.1",
+    "redux": "^5.0.1",
+    "react-redux": "^9.1.2",
+    "redux-thunk": "3.1.0",
+    "@reduxjs/toolkit": "2.3.0",
+    "react-router-dom": "^6.27.0",
+	"axios": "^1.7.7",
+    "classnames": "^2.5.1",
+	"@mui/material": "^6.1.4",
+	"@mui/icons-material": "^6.1.4",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/lab": "^6.0.0-beta.12",
+    "@mui/styles": "^6.1.4",
+	"date-fns": "^4.1.0",
+    "mdi-react": "9.4.0"
+  },
+  "scripts": {
+    "watch": "webpack --watch -d",
+    "dev": "webpack-dev-server --open --hot --port 8085 --host 127.0.0.1",
+    "build": "cross-env NODE_ENV=production webpack --progress"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.8",
+	"babel-loader": "^9.2.1",
+	"@babel/plugin-transform-runtime": "^7.25.7",
+	"@babel/preset-env": "^7.25.8",
+    "@babel/preset-react": "^7.25.7",
+	"@babel/plugin-proposal-function-bind": "^7.25.8",
+    "@babel/plugin-proposal-decorators": "^7.25.7",
+    "@babel/plugin-proposal-function-sent": "^7.25.8",
+    "@babel/plugin-transform-export-namespace-from": "^7.25.8",
+    "@babel/plugin-transform-numeric-separator": "^7.25.8",
+    "@babel/plugin-proposal-throw-expressions": "^7.25.8",
+    "@babel/plugin-transform-class-properties": "^7.25.7",
+	"cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0",
+	"webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0",
+    "html-webpack-plugin": "^5.6.2"
+  }
+}
