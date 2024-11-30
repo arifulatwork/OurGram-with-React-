@@ -15,13 +15,23 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useDispatch, useSelector } from "react-redux";
+import { setActiveScreen } from '../store/actions/application';
+import { HOME } from '../utils/ScreenNames';
 
 const drawerWidth = 340;
 export default function AppLayout(props) {
   const { children } = props;
-
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const dispatch = useDispatch();
+  const activeScreen = useSelector(state => state.application.activeScreen);
+
+  const handleHome = () => {
+    dispatch(setActiveScreen(HOME, {}));
+    setIsClosing(true);
+    setMobileOpen(false);
+  }
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -30,6 +40,7 @@ export default function AppLayout(props) {
   const handleDrawerTransitionEnd = () => {
     setIsClosing(false);
   };
+
   const handleDrawerToggle = () => {
     if (!isClosing) {
       setMobileOpen(!mobileOpen);
@@ -42,7 +53,7 @@ export default function AppLayout(props) {
       <Divider />
       <List>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleHome} selected={ activeScreen == HOME }>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
@@ -68,6 +79,7 @@ export default function AppLayout(props) {
       </List>
     </div>
   );
+
   return (
     <Box sx={{ display: 'flex', width: '100%' }}>
       <CssBaseline />
@@ -78,6 +90,7 @@ export default function AppLayout(props) {
           ml: { md: `${drawerWidth}px` },
         }}
       >
+
         <Toolbar>
           <IconButton
             color="inherit"
@@ -93,7 +106,7 @@ export default function AppLayout(props) {
         component="nav"
         sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
       >
-       <Drawer
+        <Drawer
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'none', md: 'block' },
@@ -129,7 +142,6 @@ export default function AppLayout(props) {
         </Box>
       </Box>
 
-      {/* {children} */}
     </Box>
   );
 }

@@ -4,15 +4,18 @@ import { Provider } from 'react-redux';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import MainComponent from './components/MainComponent';
+import store from './store/store';
 
 
 const theme = createTheme();
 
 function Main() {
   return (
+    <Provider store={store}>
     <ThemeProvider theme={theme}>
       <MainComponent/>
     </ThemeProvider>
+    </Provider>
   );
 }
 
