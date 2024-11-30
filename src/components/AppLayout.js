@@ -13,6 +13,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from '@mui/icons-material/Menu';
 
 const drawerWidth = 340;
 export default function AppLayout(props) {
@@ -27,6 +29,11 @@ export default function AppLayout(props) {
   };
   const handleDrawerTransitionEnd = () => {
     setIsClosing(false);
+  };
+  const handleDrawerToggle = () => {
+    if (!isClosing) {
+      setMobileOpen(!mobileOpen);
+    }
   };
 
   const drawer = (
@@ -67,23 +74,47 @@ export default function AppLayout(props) {
       <AppBar
         position="fixed"
         sx={{
-          width: `calc(100% - ${drawerWidth}px)`,
-          ml: `${drawerWidth}px`,
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
         }}
       >
-        <Toolbar />
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
       </AppBar>
       <Box
         component="nav"
         sx={{ width: drawerWidth, flexShrink: 0 }}
       >
-        <Drawer
+       <Drawer
           variant="permanent"
           sx={{
-            display: 'block',
+            display: { xs: 'none', sm: 'none', md: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onTransitionEnd={handleDrawerTransitionEnd}
+          onClose={handleDrawerClose}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'block', md: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
         >
           {drawer}
         </Drawer>
