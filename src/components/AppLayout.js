@@ -91,7 +91,7 @@ export default function AppLayout(props) {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: drawerWidth, flexShrink: 0 }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
       >
        <Drawer
           variant="permanent"
@@ -121,7 +121,7 @@ export default function AppLayout(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: `calc(100% - ${drawerWidth}px)` }}
+        sx={{ flexGrow: 1, p: { xs: 1, md: 3 }, width: { md: `calc(100% - ${drawerWidth}px)`, xs: '100%' } }}
       >
         <Toolbar />
         <Box sx={{ flexGrow: 1 }}>
