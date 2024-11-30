@@ -17,6 +17,11 @@ export default function FeedCard(props) {
     <React.Fragment>
       <Card sx={{ maxWidth: 445 }} {...props}>
         <CardHeader
+        avatar={
+            <Avatar sx={{ bgcolor: "primary.main" }}>
+              {post.username.charAt(0).toUpperCase()}
+            </Avatar>
+          }
           title={post.username}
           subheader={post.date}
         />
