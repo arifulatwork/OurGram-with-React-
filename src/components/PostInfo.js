@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import { useSelector, useDispatch } from 'react-redux';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import AccountAvatar from './AccountAvatar';
 
 import ImageStepper from './ImageStepper';
 import * as postService from '../service/PostService';
@@ -27,7 +28,7 @@ export default function PostInfo(props) {
   return (
     <Grid container >
       <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', justifyContent: 'center' }}>
-        Here will be ImageStepper
+      <ImageStepper images={post.images} />
       </Grid>
       <Grid size={{ xs: 12, md: 6 }} sx={{ display: 'flex', flexDirection: 'column' }}>
         <Typography variant="body2">{post.description}</Typography>
@@ -48,10 +49,14 @@ function CommentList(props) {
       { comments.map((comment, index) => {
         return (
           <Box key={index} sx={{ display: 'flex', alignItems: 'center' }} p={1}>
-            {/* Add AccountAvatar component here */}
+            <AccountAvatar username={comment.username} size="small" />
             <div style={{ marginLeft: '5px' }}>
-              {/* Add Typography component for the username and comment message */}
-              {/* Add Typography component for the comment date */}
+            <Typography variant="body2">
+              <strong>{comment.username}</strong>: {comment.msg}
+            </Typography>
+            <Typography variant="caption" color="text.secondary">
+              {comment.date}
+            </Typography>
             </div>
           </Box>
         );
@@ -66,8 +71,15 @@ function AddCommentField(props) {
 
   const handleChangeComment = (event) => {
     setComment(event.target.value);
-  }
+  };
 
+  const handleAddComment = () => {
+    postService.addPostComment(postId, comment).then((response) => {
+      setComment(''); 
+    }).catch((error) => {
+      console.error('Error adding comment:', error);
+    });
+  };
 
   return (
     <TextField
@@ -78,14 +90,17 @@ function AddCommentField(props) {
       fullWidth
       value={comment}
       onChange={handleChangeComment}
-      slotProps={{
-        input: {
-          endAdornment: <InputAdornment position="start">
-          <IconButton disabled={!!!comment} >
-            <SendIcon />
-          </IconButton>
-        </InputAdornment>,
-        },
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleAddComment}
+              disabled={!comment.trim()} // Disable button if the comment is empty
+            >
+              <SendIcon />
+            </IconButton>
+          </InputAdornment>
+        ),
       }}
     />
   );

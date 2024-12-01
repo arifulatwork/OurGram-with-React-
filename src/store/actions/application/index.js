@@ -1,6 +1,6 @@
 import { SET_ACTIVE_SCREEN } from "./types"
 import * as accountService from '../../../service/AccountService';
-import { MY_PROFILE } from '../../../utils/ScreenNames';
+import { MY_PROFILE, PROFILE } from '../../../utils/ScreenNames';
 
 export const setActiveScreen = (activeScreen, options) => {
   return {
@@ -17,3 +17,12 @@ export function showMyProfile() {
     });
   };
 }
+
+export function showProfile(userId) {
+  return function (dispatch, getState) {
+    accountService.getProfile(userId).then(response => {
+      dispatch(setActiveScreen(PROFILE, { profile: response.data }));
+    });
+  };
+}
+
