@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Stack, Typography, Button } from '@mui/material';
+import { PostList } from './PostList';
 
 // Constants for active screen
 const MY_PROFILE = 'myProfile';  // Replace with actual value if needed
