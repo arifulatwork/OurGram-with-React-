@@ -1,18 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { PostList } from './PostList';
-import ProfileInfo from './ProfileInfo';  // Import ProfileInfo
+import ProfileInfo from './ProfileInfo';
 
 export default function ProfileScreen() {
   const screenOptions = useSelector((state) => state.application.screenOptions);
-  const profile = screenOptions.profile; 
+  const profile = screenOptions.profile;
+  const dispatch = useDispatch();
 
   if (!profile) {
-    return <Typography variant="h6">Loading...</Typography>;  
+    return <Typography variant="h6">Loading...</Typography>;
   }
+
+  const handleEditProfileClick = () => {
+    dispatch({
+      type: 'SET_ACTIVE_SCREEN',
+      payload: { screen: 'editProfile' }
+    });
+  };
 
   return (
     <Grid container spacing={1} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -25,12 +33,12 @@ export default function ProfileScreen() {
       </Grid>
 
       <Grid item xs={12} sm={6} md={6} lg={6} xl={5}>
-        {/* Add ProfileInfo here with only Edit Profile button */}
-        <ProfileInfo profile={profile} />
+        {/* ProfileInfo with edit button */}
+        <ProfileInfo profile={profile} onEditProfileClick={handleEditProfileClick} />
       </Grid>
 
       <Grid item xs={12} xl={10}>
-        <PostList profile={profile} /> 
+        <PostList profile={profile} />
       </Grid>
     </Grid>
   );
