@@ -5,6 +5,8 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { PostList } from './PostList';
 import ProfileInfo from './ProfileInfo';
+import { EDIT_PROFILE } from '../utils/ScreenNames';
+import { setActiveScreen } from '../store/actions/application';
 
 export default function ProfileScreen() {
   const screenOptions = useSelector((state) => state.application.screenOptions);
@@ -16,10 +18,7 @@ export default function ProfileScreen() {
   }
 
   const handleEditProfileClick = () => {
-    dispatch({
-      type: 'SET_ACTIVE_SCREEN',
-      payload: { screen: 'editProfile' }
-    });
+    dispatch(setActiveScreen(EDIT_PROFILE, {}));
   };
 
   return (

@@ -20,7 +20,7 @@ import { setActiveScreen } from '../store/actions/application';
 import { HOME, MY_PROFILE } from '../utils/ScreenNames';
 import { CREATE_POST } from '../utils/ScreenNames';
 import { showMyProfile } from '../store/actions/application';
-
+import { EDIT_PROFILE } from '../utils/ScreenNames';
 const drawerWidth = 340;
 export default function AppLayout(props) {
   const { children } = props;
@@ -40,6 +40,14 @@ export default function AppLayout(props) {
     setIsClosing(true);
     setMobileOpen(false);
   } 
+
+  const handleEditProfileClick = () => {
+    // Dispatch setActiveScreen with EDIT_PROFILE to navigate to the edit profile screen
+    dispatch(setActiveScreen(EDIT_PROFILE, {}));
+    setIsClosing(true);
+    setMobileOpen(false);
+
+  };
 
   const handleShowMyProfile = () => {
     dispatch(showMyProfile());
@@ -90,6 +98,7 @@ export default function AppLayout(props) {
             <ListItemText primary="Profile" />
           </ListItemButton>
         </ListItem>
+        
       </List>
     </div>
   );
